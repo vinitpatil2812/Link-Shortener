@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const urlSchema = new mongoose.Schema({
     shortID : {
-        type : string,
+        type : String,
         required : true,
     },
 
     reDirect : {
-        type : string
+        type : String
     },
 
     clicks : {
@@ -17,4 +17,4 @@ const urlSchema = new mongoose.Schema({
 
 const URL = mongoose.model('url', urlSchema);
 
-model.exports = URL;
+module.exports = URL;
