@@ -1,12 +1,13 @@
 const URL = require("../models/url");
+const express = require("express");
 const shortid = require("shortid");
 
 async function handleGenerateNewShortURL(req, res) {
     const body = req.body;
-
-    if (!body) {
+    
+    if (!body || body.url === null || body.url === undefined) {
         return res.status(400).json({ error: "URL not found" });
-    }
+    }    
 
     const existingURL = await URL.findOne({ reDirect: body.url });
 
@@ -32,6 +33,8 @@ async function handleGenerateNewShortURL(req, res) {
 async function handleReDirectURL(req, res) {
     const shortID = req.params.shortID;
 
+    // console.log("Short ID:", shortID);
+
     const entry = await URL.findOneAndUpdate(
         { shortID },
         { $inc: { clicks: 1 } },
@@ -44,6 +47,7 @@ async function handleReDirectURL(req, res) {
 
     res.redirect(entry.reDirect);
 }
+
 
 async function handleGetAnalytics(req, res) {
     const shortID = req.params.shortID;

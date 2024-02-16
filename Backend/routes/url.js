@@ -4,7 +4,7 @@ const { handleGenerateNewShortURL, handleGetAnalytics, handleReDirectURL } = req
 const router = express.Router(); 
 
 router.post('/', handleGenerateNewShortURL);
-router.get('/:shortenedID', handleReDirectURL); 
+router.get('/:shortID', handleReDirectURL); 
 router.get('/analytics/:shortID', handleGetAnalytics);
 
 module.exports = router;
